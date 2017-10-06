@@ -15,3 +15,18 @@ print_tree(Root_id) :-
 	!,
 	member(Next_node, Children),
 	print_tree(Next_node).
+
+% nnodes([root_id], n)
+nnodes([], N) :-
+	N is 0.
+nnodes([Id|Ids], N) :-
+	nnodes(Id, N1),
+	nnodes(Ids, N2),
+	N is N1 + N2.
+
+% nnodes(root_id, n)
+nnodes(Root_id, N) :-
+	node(Root_id, _, Children),
+	nnodes(Children, N1),
+	!,
+	N is N1 + 1.
