@@ -1,11 +1,12 @@
 % Hendrik Werner s4549775
 
-% node(id, content, [child_id])
-node(0, hendrik, [1, 2]).
-node(1, alex, [3]).
-node(2, conny, [4]).
-node(3, mauro, []).
-node(4, maurice, []).
+% node(id, label, hitting_set, [child_id])
+node(1, [x1, x2], [], [2, 3]).
+node(2, diagnosis, [x1], []).
+node(3, [x1, a2, o1], [x2], [4, 5, 6]).
+node(4, diagnosis, [x1, x2], []).
+node(5, diagnosis, [x1, a2], []).
+node(6, diagnosis, [x1, o1], []).
 
 % print_tree(root_id)
 print_tree(Root_id) :-
