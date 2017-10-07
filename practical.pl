@@ -10,9 +10,10 @@ node(6, diagnosis, [x1, o1], []).
 
 % print_tree(root_id)
 print_tree(Root_id) :-
-	node(Root_id, Content, Children),
+	node(Root_id, Label, Hitting_set, Children),
 	write("Node "), write(Root_id), nl,
-	write("\tContent: "), write(Content), nl,
+	write("\tLabel: "), write(Label), nl,
+	write("\tHitting Set: "), write(Hitting_set), nl,
 	!,
 	member(Next_node, Children),
 	print_tree(Next_node).
