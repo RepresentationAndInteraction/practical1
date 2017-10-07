@@ -1,6 +1,7 @@
 % Hendrik Werner s4549775
 
 % node(id, [child_id])
+% node(X, Y) <-> node with id X has children with ids in Y
 node(1, [2, 3]).
 node(2, []).
 node(3, [4, 5, 6]).
