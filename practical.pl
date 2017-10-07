@@ -16,7 +16,7 @@ print_tree(Root_id) :-
 	member(Next_node, Children),
 	print_tree(Next_node).
 
-% nnodes([root_id], n)
+% nnodes([id], n)
 nnodes([], N) :-
 	N is 0.
 nnodes([Id|Ids], N) :-
