@@ -30,11 +30,11 @@ hitting_set(6, [x2, o1]).
 % print_tree(root_id)
 print_tree(Root_id) :-
 	node(Root_id, Children),
+	writef("Node %w\n", [Root_id]),
 	label(Root_id, Label),
+	writef("\tLabel: %w\n", [Label]),
 	hitting_set(Root_id, Hitting_set),
-	write("Node "), write(Root_id), nl,
-	write("\tLabel: "), write(Label), nl,
-	write("\tHitting Set: "), write(Hitting_set), nl,
+	writef("\tHitting Set: %w\n", [Hitting_set]),
 	!,
 	member(Child, Children),
 	print_tree(Child).
