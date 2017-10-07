@@ -45,6 +45,7 @@ nnodes([], N) :-
 nnodes([Id|Ids], N) :-
 	nnodes(Id, N1),
 	nnodes(Ids, N2),
+	!,
 	N is N1 + N2.
 
 % nnodes(root_id, n)
