@@ -28,7 +28,7 @@ nnodes([Id|Ids], N) :-
 
 % nnodes(root_id, n)
 nnodes(Root_id, N) :-
-	node(Root_id, _, Children),
+	node(Root_id, _, _, Children),
 	nnodes(Children, N1),
 	!,
 	N is N1 + 1.
