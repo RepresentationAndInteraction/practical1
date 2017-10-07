@@ -36,8 +36,8 @@ print_tree(Root_id) :-
 	write("\tLabel: "), write(Label), nl,
 	write("\tHitting Set: "), write(Hitting_set), nl,
 	!,
-	member(Next_node, Children),
-	print_tree(Next_node).
+	member(Child, Children),
+	print_tree(Child).
 
 % nnodes([id], n)
 % nnodes(X, Y) <-> the number of all nodes of trees rooted in nodes with ids in X is Y
