@@ -62,6 +62,13 @@ nnodes(Root_id, N) :-
 is_hitting_set_tree(Root_id) :-
 	is_hst(Root_id, []).
 
+%are_hst([id], previous_hitting_set)
+are_hst([], _).
+are_hst([Id|Ids], Previous_hitting_set) :-
+	!,
+	is_hst(Id, Previous_hitting_set),
+	are_hst(Ids, Previous_hitting_set).
+
 % is_hst(id, previous_hitting_set)
 is_hst(Id, Previous_hitting_set) :-
 	% the node has a valid hitting set defined
@@ -80,8 +87,5 @@ is_hst(Id, Previous_hitting_set) :-
 	!,
 	% the node either has no children, or the children are HSTs
 	node(Id, Children),
-	(
-		Children = [];
-		member(Child, Children), is_hst(Child, Hitting_set)
-	),
+	are_hst(Children, Hitting_set),
 	!.
