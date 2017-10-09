@@ -72,14 +72,16 @@ is_hst(Id, Previous_hitting_set) :-
 	),
 	!,
 	% the node has a valid label
+	label(Id, Label),
 	(
-		label(Id, diagnosis);
-		label(Id, Label), is_list(Label)
+		Label = diagnosis;
+		is_list(Label)
 	),
 	!,
 	% the node either has no children, or the children are HSTs
+	node(Id, Children),
 	(
-		node(Id, []);
-		node(Id, Children), member(Child, Children), is_hst(Child, Hitting_set)
+		Children = [];
+		member(Child, Children), is_hst(Child, Hitting_set)
 	),
 	!.
