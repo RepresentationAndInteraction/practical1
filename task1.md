@@ -21,3 +21,4 @@ $\begin{aligned}
 Conflict set: $\{A_1, A_2\}$
 
 # Problem 3
+Conflict set: $\{A_1, A_2, O_1\}$
