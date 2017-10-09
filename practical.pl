@@ -68,7 +68,7 @@ is_hst(Id, Previous_hitting_set) :-
 	hitting_set(Id, Hitting_set),
 	(
 		Hitting_set = [];
-		subtract(Hitting_set, Previous_hitting_set, [Edge_label])
+		subtract(Hitting_set, Previous_hitting_set, [_])
 	),
 	!,
 	% the node has a valid label
