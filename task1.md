@@ -18,5 +18,6 @@ $\begin{aligned}
 \end{aligned}$
 
 # Problem 2
+Conflict set: $\{A_1, A_2\}$
 
 # Problem 3
