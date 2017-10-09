@@ -60,18 +60,26 @@ nnodes(Root_id, N) :-
 % is_hitting_set_tree(root_id)
 % is_hitting_set_tree(X) <-> the tree rooted in node with id X is a hitting set tree
 is_hitting_set_tree(Root_id) :-
+	is_hst(Root_id, []).
+
+% is_hst(id, previous_hitting_set)
+is_hst(Id, Previous_hitting_set) :-
 	% the node has a valid hitting set defined
-	hitting_set(Root_id, Hitting_set),
-	is_list(Hitting_set),
+	hitting_set(Id, Hitting_set),
+	(
+		Hitting_set = [];
+		subtract(Hitting_set, Previous_hitting_set, [Edge_label])
+	),
+	!,
 	% the node has a valid label
 	(
-		label(Root_id, diagnosis);
-		label(Root_id, Label), is_list(Label)
+		label(Id, diagnosis);
+		label(Id, Label), is_list(Label)
 	),
 	!,
 	% the node either has no children, or the children are HSTs
 	(
-		node(Root_id, []);
-		node(Root_id, Children), member(Child, Children), is_hitting_set_tree(Child)
+		node(Id, []);
+		node(Id, Children), member(Child, Children), is_hst(Child, Hitting_set)
 	),
 	!.
