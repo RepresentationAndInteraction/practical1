@@ -39,21 +39,12 @@ print_tree(Root_id) :-
 	member(Child, Children),
 	print_tree(Child).
 
-% nnodes([id], n)
-% nnodes(X, Y) <-> the number of all nodes of trees rooted in nodes with ids in X is Y
-nnodes([], N) :-
-	N is 0.
-nnodes([Id|Ids], N) :-
-	nnodes(Id, N1),
-	nnodes(Ids, N2),
-	!,
-	N is N1 + N2.
-
 % nnodes(root_id, n)
 % nnodes(X, Y) <-> the tree rooted in node with id X has Y nodes
 nnodes(Root_id, N) :-
 	node(Root_id, Children),
-	nnodes(Children, N1),
+	maplist(nnodes, Children, Nodes),
+	sumlist(Nodes, N1),
 	!,
 	N is N1 + 1.
 
