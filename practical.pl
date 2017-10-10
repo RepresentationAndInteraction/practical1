@@ -36,8 +36,7 @@ print_tree(Root_id) :-
 	hitting_set(Root_id, Hitting_set),
 	writef("\tHitting Set: %w\n", [Hitting_set]),
 	!,
-	member(Child, Children),
-	print_tree(Child).
+	maplist(print_tree, Children).
 
 % nnodes(root_id, n)
 % nnodes(X, Y) <-> the tree rooted in node with id X has Y nodes
