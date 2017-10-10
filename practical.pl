@@ -60,17 +60,10 @@ nnodes(Root_id, N) :-
 % is_hitting_set_tree(root_id)
 % is_hitting_set_tree(X) <-> the tree rooted in node with id X is a hitting set tree
 is_hitting_set_tree(Root_id) :-
-	is_hst(Root_id, []).
-
-%are_hst([id], previous_hitting_set)
-are_hst([], _).
-are_hst([Id|Ids], Previous_hitting_set) :-
-	!,
-	is_hst(Id, Previous_hitting_set),
-	are_hst(Ids, Previous_hitting_set).
+	is_hst([], Root_id).
 
 % is_hst(id, previous_hitting_set)
-is_hst(Id, Previous_hitting_set) :-
+is_hst(Previous_hitting_set, Id) :-
 	% the node has a valid hitting set defined
 	hitting_set(Id, Hitting_set),
 	(
@@ -87,5 +80,5 @@ is_hst(Id, Previous_hitting_set) :-
 	!,
 	% the node either has no children, or the children are HSTs
 	node(Id, Children),
-	are_hst(Children, Hitting_set),
+	maplist(is_hst(Hitting_set), Children),
 	!.
