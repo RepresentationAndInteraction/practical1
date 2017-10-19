@@ -5,30 +5,30 @@
 
 % node(id, [child_id])
 % node(X, Y) <-> node with id X has children with ids in Y
-node(1, [2, 3]).
-node(2, []).
-node(3, [4, 5, 6]).
-node(4, []).
-node(5, []).
-node(6, []).
+%node(1, [2, 3]).
+%node(2, []).
+%node(3, [4, 5, 6]).
+%node(4, []).
+%node(5, []).
+%node(6, []).
 
 % label(id, label)
 % label(X, Y) <-> node with id X has label Y
-label(1, [x1, x2]).
-label(2, diagnosis).
-label(3, [x1, a2, o1]).
-label(4, diagnosis).
-label(5, diagnosis).
-label(6, diagnosis).
+%label(1, [x1, x2]).
+%label(2, diagnosis).
+%label(3, [x1, a2, o1]).
+%label(4, diagnosis).
+%label(5, diagnosis).
+%label(6, diagnosis).
 
 % hitting_set(id, hitting_set)
 % hitting_set(X, Y) <-> node with id X has hitting set Y
-hitting_set(1, []).
-hitting_set(2, [x1]).
-hitting_set(3, [x2]).
-hitting_set(4, [x2, x1]).
-hitting_set(5, [x2, a2]).
-hitting_set(6, [x2, o1]).
+%hitting_set(1, []).
+%hitting_set(2, [x1]).
+%hitting_set(3, [x2]).
+%hitting_set(4, [x2, x1]).
+%hitting_set(5, [x2, a2]).
+%hitting_set(6, [x2, o1]).
 
 % print_tree(root_id)
 print_tree(Root_id) :-
