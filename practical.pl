@@ -72,3 +72,5 @@ is_hst(Previous_hitting_set, Id) :-
 	node(Id, Children),
 	maplist(is_hst(Hitting_set), Children),
 	!.
+
+% make_hitting_set_tree(system_description, components, observations)
