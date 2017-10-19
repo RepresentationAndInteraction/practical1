@@ -77,3 +77,27 @@ is_hst(Previous_hitting_set, Id) :-
 	!.
 
 % make_hitting_set_tree(system_description, components, observations)
+make_hitting_set_tree(SD, COMP, OBS) :-
+	assert(highest_id(1)),
+	make_hst(SD, COMP, OBS, [], 1).
+
+% make_hst(system_description, components, observations, hitting_set, node_id)
+make_hst(SD, COMP, OBS, HS, N) :-
+	asserta(hitting_set(N, HS)),
+	tp(SD, COMP, OBS, HS, CS),
+	!,
+	asserta(label(N, CS)),
+	length(CS, Nc),
+	highest_id(Nh),
+	Na is Nh + 1,
+	Nz is Na + Nc - 1,
+	retract(highest_id(_)),
+	asserta(highest_id(Nz)),
+	numlist(Na, Nz, Child_ids),
+	asserta(node(N, Child_ids)),
+	maplist([Component, Child_id]>>(
+		append(HS, [Component], NHS),
+		make_hst(SD, COMP, OBS, NHS, Child_id)
+	), CS, Child_ids);
+	asserta(node(N, [])),
+	asserta(label(N, diagnosis)).
