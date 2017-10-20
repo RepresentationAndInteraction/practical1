@@ -100,3 +100,14 @@ make_hst(SD, COMP, OBS, HS, N) :-
 	), CS, Child_ids);
 	asserta(node(N, [])),
 	asserta(label(N, diagnosis)).
+
+% gather_diagnoses(id, diagnoses)
+gather_diagnoses(Id, Diagnoses) :-
+	label(Id, diagnosis),
+	!,
+	hitting_set(Id, Diagnosis),
+	Diagnoses = [Diagnosis].
+
+gather_diagnoses(Id, Diagnoses) :-
+	node(Id, Children),
+	maplist(gather_diagnoses, Children, [Diagnoses]).
