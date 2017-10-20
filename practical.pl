@@ -115,3 +115,12 @@ gather_diagnoses(Id, Diagnoses) :-
 	node(Id, Children),
 	maplist(gather_diagnoses, Children, Diagnoses1),
 	foldl(append, Diagnoses1, [], Diagnoses).
+
+% minimal_diagnoses(diagnoses, minimal_diagnoses)
+minimal_diagnoses([], []).
+minimal_diagnoses([D | Ds], MD) :-
+	select(D1, Ds, Ds1),
+	subset(D, D1) ->
+		minimal_diagnoses([D | Ds1], MD);
+	MD = [D | Ds2],
+	minimal_diagnoses(Ds, Ds2).
