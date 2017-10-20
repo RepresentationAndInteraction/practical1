@@ -91,7 +91,7 @@ make_hst(SD, COMP, OBS, HS, N) :-
 	length(CS, Nc),
 	highest_id(Nh),
 	Na is Nh + 1,
-	Nz is Na + Nc - 1,
+	Nz is Nh + Nc,
 	retract(highest_id(_)),
 	asserta(highest_id(Nz)),
 	numlist(Na, Nz, Child_ids),
