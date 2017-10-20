@@ -3,6 +3,8 @@
 :- ["diagnosis"].
 :- ["tp"].
 
+:- asserta(highest_id(0)).
+
 % node(id, [child_id])
 % node(X, Y) <-> node with id X has children with ids in Y
 %node(1, [2, 3]).
@@ -77,10 +79,12 @@ is_hst(Previous_hitting_set, Id) :-
 	maplist(is_hst(Hitting_set), Children),
 	!.
 
-% make_hitting_set_tree(system_description, components, observations)
-make_hitting_set_tree(SD, COMP, OBS) :-
-	assert(highest_id(1)),
-	make_hst(SD, COMP, OBS, [], 1).
+% make_hitting_set_tree(system_description, components, observations, id)
+make_hitting_set_tree(SD, COMP, OBS, Id) :-
+	make_hst(SD, COMP, OBS, [], Id),
+	retract(highest_id(Highest_id)),
+	New_id is Highest_id + 1,
+	asserta(highest_id(New_id)).
 
 % make_hst(system_description, components, observations, hitting_set, node_id)
 make_hst(SD, COMP, OBS, HS, N) :-
@@ -138,7 +142,8 @@ cmp_length(D, L1, L2) :-
 % diagnose(system_description, components, observations, minimal_diagnoses)
 % diagnose(W, X, Y, Z) <-> The diagnostic problem described by W, X, Y has minimal diagnoses Z
 diagnose(SD, COMP, OBS, MD) :-
-	make_hitting_set_tree(SD, COMP, OBS),
-	gather_diagnoses(1, Diagnoses),
+	highest_id(Id),
+	make_hitting_set_tree(SD, COMP, OBS, Id),
+	gather_diagnoses(Id, Diagnoses),
 	predsort(cmp_length, Diagnoses, Sorted_diagnoses),
 	minimal_diagnoses(Sorted_diagnoses, MD).
