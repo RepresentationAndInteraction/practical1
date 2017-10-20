@@ -133,3 +133,11 @@ cmp_length(D, L1, L2) :-
 	length(L1, N1),
 	length(L2, N2),
 	N1 < N2 -> D = <; D = > .
+
+% diagnose(system_description, components, observations, minimal_diagnoses)
+% diagnose(W, X, Y, Z) <-> The diagnostic problem described by W, X, Y has minimal diagnoses Z
+diagnose(SD, COMP, OBS, MD) :-
+	make_hitting_set_tree(SD, COMP, OBS),
+	gather_diagnoses(1, Diagnoses),
+	predsort(cmp_length, Diagnoses, Sorted_diagnoses),
+	minimal_diagnoses(Sorted_diagnoses, MD).
