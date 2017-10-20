@@ -143,6 +143,7 @@ cmp_length(D, L1, L2) :-
 % diagnose(W, X, Y, Z) <-> The diagnostic problem described by W, X, Y has minimal diagnoses Z
 diagnose(SD, COMP, OBS, MD) :-
 	highest_id(Id),
+	asserta(tree_root(Id)),
 	make_hitting_set_tree(SD, COMP, OBS, Id),
 	gather_diagnoses(Id, Diagnoses),
 	predsort(cmp_length, Diagnoses, Sorted_diagnoses),
