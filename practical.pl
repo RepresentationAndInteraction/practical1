@@ -105,6 +105,7 @@ make_hst(_, _, _, _, N) :-
 	asserta(label(N, diagnosis)).
 
 % gather_diagnoses(id, diagnoses)
+% gather_diagnoses(X, Y) <-> the tree rooted in X has diagnoses Y
 gather_diagnoses(Id, Diagnoses) :-
 	label(Id, diagnosis),
 	!,
