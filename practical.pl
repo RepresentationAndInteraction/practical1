@@ -96,8 +96,7 @@ make_hst(SD, COMP, OBS, HS, N) :-
 	numlist(Na, Nz, Child_ids),
 	asserta(node(N, Child_ids)),
 	maplist([Component, Child_id]>>(
-		NHS = [Component | HS],
-		make_hst(SD, COMP, OBS, NHS, Child_id)
+		make_hst(SD, COMP, OBS, [Component | HS], Child_id)
 	), CS, Child_ids);
 	asserta(node(N, [])),
 	asserta(label(N, diagnosis)).
