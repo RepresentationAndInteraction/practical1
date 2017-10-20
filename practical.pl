@@ -124,3 +124,11 @@ minimal_diagnoses([D | Ds], MD) :-
 		minimal_diagnoses([D | Ds1], MD);
 	MD = [D | Ds2],
 	minimal_diagnoses(Ds, Ds2).
+
+% cmp_length(delta, list1, list2)
+% cmp(<, X, Y) <-> list X is shorter than list Y
+% cmp(>, X, Y) <-> list X is not shorter than list Y
+cmp_length(D, L1, L2) :-
+	length(L1, N1),
+	length(L2, N2),
+	N1 < N2 -> D = <; D = > .
