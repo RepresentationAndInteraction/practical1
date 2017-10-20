@@ -118,6 +118,7 @@ gather_diagnoses(Id, Diagnoses) :-
 	foldl(append, Diagnoses1, [], Diagnoses).
 
 % minimal_diagnoses(diagnoses, minimal_diagnoses)
+% Inspired by https://stackoverflow.com/a/13739185/4637060
 minimal_diagnoses([], []).
 minimal_diagnoses([D | Ds], MD) :-
 	select(D1, Ds, Ds1),
