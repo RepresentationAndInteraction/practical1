@@ -34,11 +34,11 @@
 print_tree(Root_id) :-
 	node(Root_id, Children),
 	writef("Node %w\n", [Root_id]),
+	writef("\tChildren: %w\n", [Children]),
 	label(Root_id, Label),
 	writef("\tLabel: %w\n", [Label]),
 	hitting_set(Root_id, Hitting_set),
 	writef("\tHitting Set: %w\n", [Hitting_set]),
-	writef("\tChildren: %w\n", [Children]),
 	!,
 	maplist(print_tree, Children).
 
