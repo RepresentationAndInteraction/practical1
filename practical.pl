@@ -111,4 +111,5 @@ gather_diagnoses(Id, Diagnoses) :-
 
 gather_diagnoses(Id, Diagnoses) :-
 	node(Id, Children),
-	maplist(gather_diagnoses, Children, [Diagnoses]).
+	maplist(gather_diagnoses, Children, Diagnoses1),
+	foldl(append, Diagnoses1, [], Diagnoses).
