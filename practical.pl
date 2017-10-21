@@ -127,8 +127,8 @@ minimal_diagnoses([D | Ds], MD) :-
 	select(D1, Ds, Ds1),
 	subset(D, D1) ->
 		minimal_diagnoses([D | Ds1], MD);
-	MD = [D | Ds2],
-	minimal_diagnoses(Ds, Ds2).
+	MD = [D | MD1],
+	minimal_diagnoses(Ds, MD1).
 
 % cmp_length(delta, list1, list2)
 % cmp(<, X, Y) <-> list X is shorter than list Y
