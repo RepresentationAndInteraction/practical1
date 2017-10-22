@@ -53,30 +53,20 @@ nnodes(Root_id, N) :-
 	!,
 	N is N1 + 1.
 
-% is_hitting_set_tree(root_id)
-% is_hitting_set_tree(X) <-> the tree rooted in node with id X is a hitting set tree
-is_hitting_set_tree(Root_id) :-
-	is_hst([], Root_id).
-
-% is_hst(id, previous_hitting_set)
-is_hst(Previous_hitting_set, Id) :-
-	% the node has a valid hitting set defined
-	hitting_set(Id, Hitting_set),
-	(
-		Hitting_set = [];
-		subtract(Hitting_set, Previous_hitting_set, [_])
-	),
-	!,
-	% the node has a valid label
+% is_hitting_set_tree(components, previous_hitting_set, node_id)
+% is_hitting_set_tree(X, Y, Z) <-> the tree rooted in node with id Z is a hitting set tree,
+%	consisting of the components X, with previous hitting set Y.
+is_hitting_set_tree(COMP, HS, Id) :-
+	subset(HS, COMP),
+	hitting_set(Id, HS1),
+	subset(HS, HS1),
 	label(Id, Label),
 	(
 		Label = diagnosis;
-		is_list(Label)
+		subset(Label, COMP)
 	),
-	!,
-	% the node either has no children, or the children are HSTs
 	node(Id, Children),
-	maplist(is_hst(Hitting_set), Children),
+	maplist(is_hitting_set_tree(COMP, HS1), Children),
 	!.
 
 % make_hitting_set_tree(system_description, components, observations, id)
