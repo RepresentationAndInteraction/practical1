@@ -65,9 +65,9 @@ is_hitting_set_tree(COMP, HS, Id) :-
 		Label = diagnosis;
 		subset(Label, COMP)
 	),
+	!,
 	node(Id, Children),
-	maplist(is_hitting_set_tree(COMP, HS1), Children),
-	!.
+	maplist(is_hitting_set_tree(COMP, HS1), Children).
 
 % make_hitting_set_tree(system_description, components, observations, id)
 make_hitting_set_tree(SD, COMP, OBS, Id) :-
